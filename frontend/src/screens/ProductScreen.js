@@ -1,17 +1,18 @@
 import axios from "axios";
-import { useEffect, useReducer } from "react";
-import Col from "react-bootstrap/Col";
+import { useContext, useEffect, useReducer } from "react";
+import { useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
 import Rating from "../components/Rating";
-import { useParams } from "react-router-dom";
-import Button from "react-bootstrap/esm/Button";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
+import { Store } from "../Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -36,7 +37,7 @@ function ProductScreen() {
     error: "",
   });
   useEffect(() => {
-    const fecthData = async () => {
+    const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get(`/api/products/slug/${slug}`);
@@ -45,8 +46,16 @@ function ProductScreen() {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
-    fecthData();
+    fetchData();
   }, [slug]);
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const addToCartHandler = () => {
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...product, quantity: 1 },
+    });
+  };
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -75,7 +84,7 @@ function ProductScreen() {
                 numReviews={product.numReviews}
               ></Rating>
             </ListGroup.Item>
-            <ListGroup.Item>Pirce : {product.price}</ListGroup.Item>
+            <ListGroup.Item>Pirce : ${product.price}</ListGroup.Item>
             <ListGroup.Item>
               Description:
               <p>{product.description}</p>
@@ -89,7 +98,7 @@ function ProductScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Price:</Col>
-                    <Col>{product.price}</Col>
+                    <Col>${product.price}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -108,7 +117,9 @@ function ProductScreen() {
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className='d-grid'>
-                      <Button variant='primary'>Add to Cart</Button>
+                      <Button onClick={addToCartHandler} variant='primary'>
+                        Add to Cart
+                      </Button>
                     </div>
                   </ListGroup.Item>
                 )}
@@ -120,5 +131,4 @@ function ProductScreen() {
     </div>
   );
 }
-
 export default ProductScreen;

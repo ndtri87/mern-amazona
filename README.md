@@ -44,3 +44,8 @@
         1. Create Loading component
         2. use Spinner component
         3. Create utils.js to difine getError function
+    14. Implement Add To Cart
+        1. Create React Context
+        2. Define reducer
+        3. Create store provider
+        4. Implement add to cart button click handler
