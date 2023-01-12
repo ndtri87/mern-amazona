@@ -79,3 +79,7 @@
         1. Create user model
         2. Seed sample users
         3. Create user routes
+    22. Create Signin Backend API
+        1. Create signin api
+        2. npm install jsonwebtoken
+        3. define generateToken
