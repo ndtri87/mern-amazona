@@ -1,5 +1,4 @@
 import { useEffect, useReducer } from "react";
-
 import axios from "axios";
 import logger from "use-reducer-logger";
 import Row from "react-bootstrap/Row";
@@ -8,7 +7,7 @@ import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-// import data from "../data";
+// import data from '../data';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -31,7 +30,7 @@ function HomeScreen() {
   });
   // const [products, setProducts] = useState([]);
   useEffect(() => {
-    const fecthData = async () => {
+    const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get("/api/products");
@@ -40,9 +39,9 @@ function HomeScreen() {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
 
-      //setProducts(result.data);
+      // setProducts(result.data);
     };
-    fecthData();
+    fetchData();
   }, []);
   return (
     <div>
@@ -68,5 +67,4 @@ function HomeScreen() {
     </div>
   );
 }
-
 export default HomeScreen;
