@@ -207,3 +207,13 @@
     1. add delete button
     2. handle click action
     3. implement backen api for delete
+50. Choose Address On Google Map
+    1. Create google map credentials
+    2. update .env file with Google Api Key
+    3. Create api to send google api frontend
+    4. Create map screen
+    5. Fetch google api
+    6. getUserLocation
+    7. install @react-google-maps/api
+    8. use it in shipping screen
+    9. Apply map to the checkout screen
