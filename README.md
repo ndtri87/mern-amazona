@@ -224,3 +224,6 @@
     4. Set api key in env file
     5. Change pay order in orderRouter
     6. Send email order receipt
+52. Review Order
+    1. Create submit review form
+    2. Implement backend api for review
