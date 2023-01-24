@@ -217,3 +217,10 @@
     7. install @react-google-maps/api
     8. use it in shipping screen
     9. Apply map to the checkout screen
+51. Email order receipt by mailgun
+    1. Create mailgun account
+    2. Add and verify your domain to mailgun
+    3. Install mailgun-js
+    4. Set api key in env file
+    5. Change pay order in orderRouter
+    6. Send email order receipt
