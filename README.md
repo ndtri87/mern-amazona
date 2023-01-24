@@ -227,3 +227,7 @@
 52. Review Order
     1. Create submit review form
     2. Implement backend api for review
+53. Upload multiple Images
+    1. Add images to product model
+    2. Get images in edit screen
+    3. Show images in product screen
